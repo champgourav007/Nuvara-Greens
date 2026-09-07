@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
 
 interface Product { id: string; name: string; description: string; tag: string; artwork: string; colour: string; unit_weight_g: number; price_inr: number; }
 interface CartItem { product: Product; quantity: number; }
@@ -12,7 +13,7 @@ interface CartItem { product: Product; quantity: number; }
 })
 export class AppComponent {
   private readonly http = inject(HttpClient);
-  readonly apiUrl = 'http://localhost:8000/api';
+  readonly apiUrl = environment.apiUrl;
   readonly products = signal<Product[]>([]);
   readonly cart = signal<CartItem[]>(this.restoreCart());
   readonly isCartOpen = signal(false);
